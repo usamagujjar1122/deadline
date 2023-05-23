@@ -1,0 +1,81 @@
+{% extends 'part/base.html' %}
+
+ {% block content %}
+<title>Login Page </title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register-form">
+            <div class="form">
+                <div class="note">
+                    <p> Sign up</p>
+                </div>
+<form action="{% url 'signin' %}" method="POST">
+                                    {% csrf_token %}
+                <div class="form-content">
+
+                    <div class="row">
+                         <label >Username</label>
+          <input class="form-styling" type="text" name="username" placeholder=""/>
+          <label >Password</label>
+          <input class="form-styling" type="password" name="password" placeholder=""/>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+
+                    <button type="submit" class="btnSubmit">Submit</button>
+
+                </form>
+            </div>
+        </div>
+<style>
+   .note
+{
+    text-align: center;
+    height: 80px;
+    background: #99A98F;
+    color: #fff;
+    font-weight: bold;
+    line-height: 80px;
+}
+.form-content
+{
+    padding: 5%;
+    border: 1px solid #ced4da;
+    margin-bottom: 2%;
+    margin: center;
+}
+.form-control{
+
+    border-radius:1.5rem;
+    text-align: center;
+    margin:center
+}
+.btnSubmit
+{   text-align: center;
+    border:none;
+    border-radius:1.5rem;
+    padding: 1%;
+    width: 20%;
+    cursor: pointer;
+    background: #99A98F;
+    color: #fff;
+}
+
+body{
+text-align: center;
+background: linear-gradient(to top, #ffffff, #fffcff, #fff9fa, #fff6f1, #fff6e9, #fcf5e4, #f8f5e0, #f3f5dc, #ebf2db, #e3efdb, #dcecdb, #d6e8db);}
+</style>
+{% endblock %}

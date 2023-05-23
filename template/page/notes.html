@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Notes App</title>
+<link rel="stylesheet" href="style2.css">
+
+
+</head>
+<body>
+
+    <div class="container">
+
+        <h1> Notes <img src="https://cdn4.iconfinder.com/data/icons/startup-and-new-business-2-1/52/134-512.png" width="50" height="30"> </h1>
+        <button class="btn">Create Notes <img src="https://cdn1.iconfinder.com/data/icons/communication-bold-line-3/48/127-512.png" width="20"  height="20"></button>
+        <div class="notes-container">
+             <!-- <p contenteditable="true" class="input-box">
+            <img src="https://img2.arabpng.com/20190219/iyq/kisspng-delete-key-vector-graphics-computer-icons-clip-art-remove-svg-png-icon-free-download-398867-onli-5c6c2972583012.1338760415505923703612.jpg" width="40" height="30">
+            </p> -->
+        </div>
+        <button class="button-2 " onclick="window.location.href='home'">go back to website</button>
+    </div>
+
+
+
+
+</body>
+
+    <script>
+const notesContainer = document.querySelector(".notes-container");
+const createBtn = document.querySelector(".btn");
+let notes = document.querySelectorAll(".input-box");
+
+function showNotes(){
+    notesContainer.innerHTML = localStorage.getItem("notes");
+}
+showNotes();
+
+function updateStorage(){
+    localStorage.setItem("notes", notesContainer.innerHTML);
+}
+
+createBtn.addEventListener("click", ()=>{
+    let inputBox = document.createElement("p");
+    let img = document.createElement("img");
+    inputBox.className = "input-box";
+    inputBox.setAttribute("contenteditable", "true");
+    img.src = "https://img2.arabpng.com/20190219/iyq/kisspng-delete-key-vector-graphics-computer-icons-clip-art-remove-svg-png-icon-free-download-398867-onli-5c6c2972583012.1338760415505923703612.jpg";
+    notesContainer.appendChild(inputBox).appendChild(img);
+})
+
+notesContainer.addEventListener("click", function(e){
+    if(e.target.tagName === "IMG"){
+         e.target.parentElement.remove();
+         updateStorage();
+    }
+    else if(e.target.tagName === "p"){
+        notes = document.querySelectorAll(".input-box");
+        notes.forEach(nt => {
+            nt.onkeyup = function(){
+                updateStorage();
+            }
+        })
+    }
+ })
+
+ document.addEventListener("keydown", event =>{
+    if(event.key =="Enter"){
+        document.execCommand("insertLineBreak");
+        event.preventDefault();
+    }
+ })
+    </script>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+.button-2 {
+  background-color: rgba(51, 51, 51, 0.05);
+  border-radius: 8px;
+  border-width: 0;
+  color: #333333;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 12px;
+  text-align: center;
+  transition: all 200ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #FFF8DE, #C1D0B5, #D6E8DB, #99A98F);
+    color: #fff;
+    padding-top: 4%;
+    padding-left: 10%;
+    background-color: #c4afd8;
+
+}
+
+.container h1{
+    display: flex;
+    align-items: center;
+    font-size: 35px;
+    font-weight: 600;
+
+}
+
+.container button{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(#C1D0B5, #99A98F);
+    color: #fff;
+    font-size: 16px;
+    outline: 0;
+    border: 0;
+    border-radius: 40px;
+    padding: 15px 25px;
+    margin: 30px 20px;
+    cursor: pointer;
+
+
+}
+.input-box{
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    min-height: 150px;
+    background: #fff;
+    color: #333;
+    padding: 20px ;
+    margin: 20px 0;
+    outline: none;
+    border-radius: 5px;
+}
+
+.input-box img{
+    width: 25px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+</style>
+
+</html>
